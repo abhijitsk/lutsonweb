@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <div>
+        
+    </div>
+    <form action="." method="post" enctype="multipart/form-data">
+        {% csrf_token%}
+        {{form.as_p}}
+        <button type="submit">Upload</button>
+    </form>
+    <hr>
+    {% if obj %}
+    <img src="{{obj.image.url}}" class="img-thumbnail">
+    {% endif %}
+</html>
