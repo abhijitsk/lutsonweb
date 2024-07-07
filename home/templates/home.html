@@ -1,15 +1,37 @@
 <html>
     {% load static%}
     <link rel=stylesheet type="text/css" href="{% static 'css/main.css'%}">
+    <head>
+        <style>
+            h{
+                font-color:brown
+            }
+        </style>
+    </head>
+    <h2>
+        Upload the Image to apply LUTS onto it
+    </h2>
 
-    <form action="." method="post" enctype="multipart/form-data">
-        {% csrf_token%}
-        {{form.as_p}}
-        <button type=submit>Upload</button>
-    </form>
+    <div>
+        <form action="." method="post" enctype="multipart/form-data">
+            {% csrf_token%}
+            {{form.as_p}}
+            <button type=submit>Upload</button>
+        </form>
+    </div>
     {% if obj%}
     <div>
         <img src="{{obj.image.url}}" alt="Image">
     </div>
     {%endif%}
+
+    {% if output %}
+    {% for output_ in output%}
+    <div>
+        <img src="{{output_}}">
+    </div>
+    <br>
+    {% endfor%}
+    {% endif %}
+    
 </html>

@@ -4,6 +4,7 @@ from .forms import ImageForm
 from .models import Image
 # Create your views here.
 
+from .applyLuts import ApplyLuts
 
 def upload(request):
     if request.method =='POST':
@@ -11,8 +12,11 @@ def upload(request):
         if form.is_valid():
             form.save()
             obj=form.instance
-            return render(request,'home.html',{'obj':obj})
+            # check the code
+            asd =ApplyLuts(obj.image.url[1:])
+            output =asd.ShowImages()
+            return render(request,'home.html',{'obj':obj,'output':output})
     else:
         form=ImageForm()
-    
+        
     return  render(request,'home.html',{'form':form})

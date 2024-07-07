@@ -4,6 +4,7 @@ import os
 listofLuts = os.listdir('home/LUTS')
 
 class ApplyLuts():
+    listofpaths=[]
     def __init__(self, image):
         self.unfilteredimage = Image.open(image)
 
@@ -30,11 +31,12 @@ class ApplyLuts():
             filter = ImageFilter.Color3DLUT(luts_size,lutTable)
             filtetredImage = self.unfilteredimage.filter(filter)
             filtetredImage.save('media/output/'+path+'.jpeg')
-                
+            self.listofpaths.append('/media/output/'+path+'.jpeg')
         
     
     def ShowImages(self):
+        
         for luts in listofLuts:
             self.saveFilteredImage(luts)
         
-    
+        return self.listofpaths
