@@ -1,3 +1,26 @@
 body{
     background-color: #f4dcc0;
 }
+
+.image-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.image-item {
+    border-style: none;
+    border-width: 0;
+    border-color: #f4dcc0;
+    box-shadow:  0px 4px 8px #debe9c;
+    width: 30%;
+    margin-bottom: 20px;
+}
+h2{
+    color: rgb(40, 54, 50);
+    text-align: center;
+    padding-top: 20px;
+}
+
+h4{
+    text-align: center;
+}

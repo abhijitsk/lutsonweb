@@ -2,36 +2,56 @@
     {% load static%}
     <link rel=stylesheet type="text/css" href="{% static 'css/main.css'%}">
     <head>
+        <title>LUTS info</title>
+        <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico'%}">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
         <style>
-            h{
-                font-color:brown
-            }
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
         </style>
+        
     </head>
-    <h2>
-        Upload the Image to apply LUTS onto it
-    </h2>
+    <body>
+        
+        <h2>
+            Upload the Image to apply LUTS onto it
+        </h2>
+        {%if form%}
+        <div class="upload-form">
+            <form action="." method="post" enctype="multipart/form-data">
+                {% csrf_token%}
+                {{form.as_p}}
+                <button id="upload-btn" type="submit" onclick="hideButton" style="margin-right:50px">Upload</button>
+            </form>
+        </div>
+        {% endif %}
+        {% if obj%}
+        <div >
+            <img src="{{obj.image.url}}" alt="Image" class="upload-img" width="800px" height=Auto>
+        </div>
+        <br>
+        {%endif%}
+    
+        {% if output %}
+        <div class="image-container">
+            {% for output_ in output%}
+        <div class="image-item">
+            <img src="{{output_}}" width=100% height=Auto>
+            <h4>{{output_}}</h4>
+        </div>
+        <br>
+        {% endfor%}
+        </div>
+        
+        {% endif %}
+        <script>
+            function hideButton(){
+                document.getElementById('upload-btn').style.display='none';
+                
 
-    <div>
-        <form action="." method="post" enctype="multipart/form-data">
-            {% csrf_token%}
-            {{form.as_p}}
-            <button type=submit>Upload</button>
-        </form>
-    </div>
-    {% if obj%}
-    <div>
-        <img src="{{obj.image.url}}" alt="Image">
-    </div>
-    {%endif%}
-
-    {% if output %}
-    {% for output_ in output%}
-    <div>
-        <img src="{{output_}}">
-    </div>
-    <br>
-    {% endfor%}
-    {% endif %}
+            }
+            
+        </script>
+    </body>
     
 </html>
